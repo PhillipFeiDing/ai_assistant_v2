@@ -15,3 +15,4 @@ npm run dev
 
 ## Dev Tools
 - [Prettier](https://khalilstemmler.com/blogs/tooling/prettier/)
+  - `npm run prettier-format`
