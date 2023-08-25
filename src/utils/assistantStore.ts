@@ -1,6 +1,6 @@
-import { getLocal, setLocal } from "./storage";
-import { ASSISTANT_STORE, ASSISTANT_INIT } from "./constant";
-import type { AssistantList, Assistant } from "@/types";
+import { getLocal, setLocal } from './storage';
+import { ASSISTANT_STORE, ASSISTANT_INIT } from './constant';
+import type { AssistantList, Assistant } from '@/types';
 
 const getList = (): AssistantList => {
   let list = getLocal(ASSISTANT_STORE) as AssistantList;
@@ -8,7 +8,7 @@ const getList = (): AssistantList => {
     list = ASSISTANT_INIT.map((item, index) => {
       return {
         ...item,
-        id: index + Date.now().toString(),
+        id: index + Date.now().toString()
       };
     });
     updateList(list);
@@ -29,14 +29,14 @@ const addAssistant = (assistant: Assistant): AssistantList => {
 
 const updateAssistant = (
   id: string,
-  data: Partial<Omit<Assistant, "id">>
+  data: Partial<Omit<Assistant, 'id'>>
 ): AssistantList => {
   const list = getList();
   const index = list.findIndex((item) => item.id === id);
   if (index > -1) {
     list[index] = {
       ...list[index],
-      ...data,
+      ...data
     };
     updateList(list);
   }
@@ -60,7 +60,7 @@ const store = {
   addAssistant,
   updateAssistant,
   removeAssistant,
-  getAssistant,
+  getAssistant
 };
 
 export default store;

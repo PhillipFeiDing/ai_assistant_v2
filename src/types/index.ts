@@ -1,4 +1,4 @@
-export type Role = "user" | "assistant" | "system";
+export type Role = 'user' | 'assistant' | 'system';
 
 export type Message = {
   role: Role;
@@ -12,7 +12,7 @@ export type Session = {
   assistant: string;
   id: string;
 };
-export type SessionInfo = Omit<Session, "assistant"> & {
+export type SessionInfo = Omit<Session, 'assistant'> & {
   assistant: Assistant;
 };
 export type SessionList = Session[];
@@ -34,5 +34,5 @@ export type Assistant = {
 
 export type AssistantList = Assistant[];
 
-export type EditAssistant = Omit<Assistant, "id"> &
-  Partial<Pick<Assistant, "id">>;
+export type EditAssistant = Omit<Assistant, 'id'> &
+  Partial<Pick<Assistant, 'id'>>;

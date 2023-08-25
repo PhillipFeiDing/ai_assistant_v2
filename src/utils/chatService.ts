@@ -1,4 +1,4 @@
-import { Message } from "@/types";
+import { Message } from '@/types';
 type StreamParams = {
   prompt: string;
   history?: Message[];
@@ -29,26 +29,26 @@ class ChatService {
   }
   public async getStream(params: StreamParams) {
     const { prompt, history = [], options = {} } = params;
-    let suggestion = "";
+    let suggestion = '';
     try {
-      const response = await fetch("/api/chat", {
+      const response = await fetch('/api/chat', {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json'
         },
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify({
           prompt,
           history,
-          options,
+          options
         }),
-        signal: this.controller.signal,
+        signal: this.controller.signal
       });
       const data = response.body;
       if (!data) {
         return;
       }
       const reader = data.getReader();
-      const decoder = new TextDecoder("utf-8");
+      const decoder = new TextDecoder('utf-8');
       let done = false;
       while (!done) {
         const { value, done: doneReadingStream } = await reader.read();

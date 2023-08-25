@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "dependencies": {
     "@mantine/core": "^6.0.10",
@@ -14,6 +15,7 @@
     "@mantine/next": "^6.0.10",
     "@mantine/notifications": "^6.0.10",
     "@tabler/icons-react": "^2.17.0",
+    "@types/marked": "^4.0.8",
     "@types/node": "18.16.3",
     "@types/react": "18.2.0",
     "@types/react-dom": "18.2.1",
@@ -22,7 +24,6 @@
     "clsx": "^1.2.1",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.4",
-    "@types/marked": "^4.0.8",
     "eventsource-parser": "^1.0.0",
     "highlight.js": "^11.8.0",
     "marked": "^5.0.4",

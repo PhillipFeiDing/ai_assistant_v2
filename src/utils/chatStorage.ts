@@ -1,14 +1,14 @@
 // 存储 chatLogs
-import { SESSION_STORE, MESSAGE_STORE } from "./constant";
+import { SESSION_STORE, MESSAGE_STORE } from './constant';
 import type {
   ChatLogsStorageType,
   MessageList,
   Session,
   SessionInfo,
-  SessionList,
-} from "@/types";
-import { getLocal, setLocal } from "./storage";
-import assistantStore from "./assistantStore";
+  SessionList
+} from '@/types';
+import { getLocal, setLocal } from './storage';
+import assistantStore from './assistantStore';
 
 /*** Message */
 export const getMessageStore = () => {
@@ -45,9 +45,9 @@ export const getSessionStore = (): SessionList => {
   const assistant = assistantStore.getList()[0];
   if (!list) {
     const session = {
-      name: "chat",
+      name: 'chat',
       assistant: assistant.id,
-      id: Date.now().toString(),
+      id: Date.now().toString()
     };
     list = [session];
     updateMessage(session.id, []);
@@ -78,20 +78,20 @@ export const getSession = (id: string): SessionInfo | null => {
   }
   return {
     ...session,
-    assistant: assistantInfo,
+    assistant: assistantInfo
   };
 };
 
 export const updateSession = (
   id: string,
-  data: Partial<Omit<Session, "id">>
+  data: Partial<Omit<Session, 'id'>>
 ): SessionList => {
   const list = getSessionStore();
   const index = list.findIndex((session) => session.id === id);
   if (index > -1) {
     list[index] = {
       ...list[index],
-      ...data,
+      ...data
     };
     updateSessionStore(list);
   }
