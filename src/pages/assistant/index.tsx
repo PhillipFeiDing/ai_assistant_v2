@@ -8,7 +8,9 @@ import { AssistantConfig } from "@/components/AssistantConfig";
 import Link from "next/link";
 import { ActionIcon, Card, Text, Group, Drawer, Badge } from "@mantine/core";
 import { IconChevronLeft, IconUserPlus, IconPencil } from "@tabler/icons-react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { LanguageContext } from "@/utils/languageContext";
+import { translations } from "@/utils/translations";
 
 const showNotification = (message: string) => {
   notifications.show({
@@ -24,6 +26,8 @@ const Assistant: NextPage = () => {
   const [assistantList, setAssistantList] = useState<AssistantList>([]);
   const [opened, drawerHandler] = useDisclosure(false);
   const [editAssistant, setEditAssistant] = useState<EditAssistant>();
+
+  const language = useContext(LanguageContext).language
 
   useEffect(() => {
     const list = assistantStore.getList();
@@ -42,13 +46,13 @@ const Assistant: NextPage = () => {
       let newAssistantList = assistantStore.addAssistant(newAssistant);
       setAssistantList(newAssistantList);
     }
-    showNotification("保存成功");
+    showNotification("Successful Save");
     drawerHandler.close();
   };
   const removeAssistant = (id: string) => {
     let newAssistantList = assistantStore.removeAssistant(id);
     setAssistantList(newAssistantList);
-    showNotification("移除成功");
+    showNotification("Successful Removal");
     drawerHandler.close();
   };
 
@@ -60,7 +64,8 @@ const Assistant: NextPage = () => {
   const onAddAssistant = () => {
     const newAssistant = {
       ...ASSISTANT_INIT[0],
-      name: `助理_${assistantList.length + 1} 号`,
+      prompt: translations.DEFAULT_PROMPT[language],
+      name: `Assistant #${assistantList.length + 1}`,
     };
     setEditAssistant(newAssistant);
     drawerHandler.open();
@@ -75,7 +80,7 @@ const Assistant: NextPage = () => {
           </ActionIcon>
         </Link>
         <Text weight={500} size="lg">
-          助理
+          {translations.ASSISTANTS[language]}
         </Text>
         <ActionIcon onClick={() => onAddAssistant()}>
           <IconUserPlus></IconUserPlus>
@@ -103,13 +108,13 @@ const Assistant: NextPage = () => {
                   MODEL: {item.model}
                 </Badge>
                 <Badge size="md" color="green" radius="sm">
-                  TOKEN: {item.max_tokens}
+                  MAX_TOKENS: {item.max_tokens}
                 </Badge>
                 <Badge size="md" color="blue" radius="sm">
-                  TEMP: {item.temperature}
+                  TEMPERATURE: {item.temperature}
                 </Badge>{" "}
                 <Badge size="md" color="cyan" radius="sm">
-                  LOGS: {item.max_log}
+                  MAX_LOGS: {item.max_log}
                 </Badge>
               </Group>
               <Group className="w-full flex justify-end items-center opacity-0 transition-all duration-300 group-hover:opacity-100">

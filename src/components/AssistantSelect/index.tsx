@@ -29,7 +29,7 @@ export const AssistantSelect = ({
       size="sm"
       onChange={onAssistantChange}
       value={value}
-      className="w-32 mx-2"
+      className="w-36 mx-2"
       disabled={loading}
       data={list.map((item) => ({
         value: item.id,

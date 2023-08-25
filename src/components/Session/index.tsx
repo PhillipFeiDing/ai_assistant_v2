@@ -44,7 +44,7 @@ export const Session = ({ sessionId, onChange, className }: Props) => {
   const createSession = () => {
     const assistantList = assistantStore.getList();
     const newSession: ISession = {
-      name: `session-${sessionList.length + 1}`,
+      name: `Session #${sessionList.length + 1}`,
       assistant: assistantList[0].id,
       id: Date.now().toString(),
     };

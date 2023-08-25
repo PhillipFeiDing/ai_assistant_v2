@@ -1,3 +1,5 @@
+import { ColorScheme } from '@mantine/core';
+
 export type Role = 'user' | 'assistant' | 'system';
 
 export type Message = {
@@ -19,6 +21,11 @@ export type SessionList = Session[];
 
 export type ChatLogsStorageType = {
   [key: string]: MessageList;
+};
+
+export type AppSettings = {
+  colorScheme: ColorScheme;
+  language: string;
 };
 
 export type Assistant = {

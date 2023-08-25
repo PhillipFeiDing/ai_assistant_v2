@@ -24,6 +24,8 @@ import {
 
 import { Assistant, MessageList } from "@/types";
 import clsx from "clsx";
+import { LanguageContext } from "@/utils/languageContext";
+import { translations } from "@/utils/translations";
 
 type Props = {
   sessionId: string;
@@ -138,23 +140,27 @@ export const Message = ({ sessionId }: Props) => {
           "h-[6rem]",
         ])}
       >
-        <Popover width={100} position="bottom" withArrow shadow="sm">
-          <Popover.Target>
-            <Button
-              size="sm"
-              variant="subtle"
-              className="px-1"
-              rightIcon={<IconDotsVertical size="1rem"></IconDotsVertical>}
-            >
-              AI 助理
-            </Button>
-          </Popover.Target>
-          <Popover.Dropdown>
-            <Link href="/assistant" className="no-underline text-green-600">
-              助理管理
-            </Link>
-          </Popover.Dropdown>
-        </Popover>
+        <LanguageContext.Consumer>
+          {({language}) => (
+            <Popover width={100} position="bottom" withArrow shadow="sm">
+            <Popover.Target>
+              <Button
+                size="sm"
+                variant="subtle"
+                className="px-1"
+                rightIcon={<IconDotsVertical size="1rem"></IconDotsVertical>}
+              >
+                {translations.AI_ASSISTANT[language]}
+              </Button>
+            </Popover.Target>
+            <Popover.Dropdown>
+              <Link href="/assistant" className="no-underline text-green-600">
+                {translations.MANAGE[language]}
+              </Link>
+            </Popover.Dropdown>
+          </Popover>
+          )}
+        </LanguageContext.Consumer>
         <AssistantSelect
           value={assistant?.id!}
           onChange={onAssistantChange}
@@ -237,14 +243,18 @@ export const Message = ({ sessionId }: Props) => {
         >
           <IconEraser></IconEraser>
         </ActionIcon>
-        <Textarea
-          placeholder="Enter 发送消息；Shift + Enter 换行；"
-          className="w-3/5"
-          value={prompt}
-          disabled={loading}
-          onKeyDown={(evt) => onKeyDown(evt)}
-          onChange={(evt) => setPrompt(evt.target.value)}
-        ></Textarea>
+        <LanguageContext.Consumer>
+          {
+            ({language}) => (<Textarea
+              placeholder={translations.USER_PROMPT[language]}
+              className="w-3/5"
+              value={prompt}
+              disabled={loading}
+              onKeyDown={(evt) => onKeyDown(evt)}
+              onChange={(evt) => setPrompt(evt.target.value)}
+            ></Textarea>)
+          }
+        </LanguageContext.Consumer>
         <ActionIcon color="green" className="ml-2" onClick={() => onSubmit()}>
           {loading ? <IconSendOff /> : <IconSend />}
         </ActionIcon>
