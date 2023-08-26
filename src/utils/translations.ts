@@ -56,7 +56,7 @@ export const translations: { [k1: string]: { [k2: string]: string } } = {
     ZH: '上下文数'
   },
   ASSIGN_LOGS_CONTEXT: {
-    EN: 'Number of previous images to remember by the AI assistant',
+    EN: 'Number of previous messages to remember by the AI assistant',
     ZH: '每次对话记忆的历史对话次数'
   },
   MAX_RESPONSE_SIZE: {
