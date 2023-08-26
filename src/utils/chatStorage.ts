@@ -1,4 +1,4 @@
-// 存储 chatLogs
+// store chatLogs
 import { SESSION_STORE, MESSAGE_STORE } from './constant';
 import type {
   ChatLogsStorageType,
